@@ -62,4 +62,26 @@ class maniobraTrenes {
 
     aplicarMovimientosAux(movs, List(e))
   }
+  def definirManiobra(t1: Tren, t2: Tren): List[Maniobra] = {
+
+    def aux(t1: Tren, t2: Tren, acc: List[Maniobra]): List[Maniobra] = t2 match {
+      case Nil => acc.reverse
+      case vagon :: tail =>
+        t1.indexWhere(_ == vagon) match {
+          case -1 => aux(t1, tail, acc) // Si no se encuentra, continuar sin maniobras
+          case j =>
+            val maniobra: Maniobra = List(
+              Uno(t1.length - j),
+              Dos(t2.indexOf(vagon)),
+              Uno(-(t1.length - j)),
+              Dos(-t2.indexOf(vagon))
+            )
+            aux(t1, tail, maniobra :: acc)
+        }
+    }
+
+    aux(t1, t2, Nil)
+  }
+
+
 }
