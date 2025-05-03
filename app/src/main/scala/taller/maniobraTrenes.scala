@@ -62,13 +62,23 @@ class maniobraTrenes {
 
     aplicarMovimientosAux(movs, List(e))
   }
-  def definirManiobra(t1: Tren, t2: Tren): List[Maniobra] = {
 
+
+  /**
+   * Genera una lista de posibles maniobras para transformar el tren t1 en el orden deseado t2.
+   * Cada maniobra es una secuencia de movimientos necesarios para colocar un vagón de t1 en la posición correspondiente de t2.
+   *
+   * @param t1 Tren de entrada (estado inicial).
+   * @param t2 Tren objetivo (estado deseado).
+   * @return Lista de maniobras que, aplicadas en orden, reordenan los vagones de t1 para que coincidan con t2.
+   */
+
+  def definirManiobra(t1: Tren, t2: Tren): List[Maniobra] = {
     def aux(t1: Tren, t2: Tren, acc: List[Maniobra]): List[Maniobra] = t2 match {
       case Nil => acc.reverse
       case vagon :: tail =>
         t1.indexWhere(_ == vagon) match {
-          case -1 => aux(t1, tail, acc) // Si no se encuentra, continuar sin maniobras
+          case -1 => aux(t1, tail, acc)
           case j =>
             val maniobra: Maniobra = List(
               Uno(t1.length - j),

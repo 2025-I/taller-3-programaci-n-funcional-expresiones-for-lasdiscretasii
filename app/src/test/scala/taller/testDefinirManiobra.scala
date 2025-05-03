@@ -5,7 +5,7 @@ import org.junit.runner.RunWith
 import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
-class DefinirManiobraTest extends AnyFunSuite {
+class testDefinirManiobra extends AnyFunSuite {
 
   val maniobraTrenes = new maniobraTrenes
 
